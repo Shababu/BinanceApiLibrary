@@ -21,12 +21,13 @@ namespace BinanceAPI
     {
         static void Main(string[] args)
         {
-
+            //Пример использования: Вывод баланса всех кошельков, которые не пустые
+            //BinanceApiUser user = new BinanceApiUser("Публичный ключ аккаунта", "Приватный ключ аккаунта");
             //List<Balances> wallet = MarketInfo.GetWalletInfo(user);
-                
-            //foreach(var asset in wallet)
+
+            //foreach (var asset in wallet)
             //{
-            //    Console.WriteLine(asset.Asset + ": " + asset.Free);
+            //    Console.WriteLine(asset);
             //}
 
         }

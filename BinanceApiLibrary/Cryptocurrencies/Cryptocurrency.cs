@@ -24,10 +24,5 @@ namespace BinanceApiLibrary.Cryptocurrencies
         {
             return Symbol;
         }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
     }
 }
