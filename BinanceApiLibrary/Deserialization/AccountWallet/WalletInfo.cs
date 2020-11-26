@@ -13,7 +13,7 @@ namespace BinanceApiLibrary.Deserialization.AccountWallet
         public static List<Balances> DeserializeWalletInfo(string jsonString)
         {
             WalletDeserialization info = JsonConvert.DeserializeObject<WalletDeserialization>(jsonString);
-            List<Balances> assets = info.Balances.Where(b => Convert.ToDouble(b.Free.Replace('.', ',')) > 0.000).ToList();
+            List<Balances> assets = info.Balances.Where(b => Convert.ToDouble(b.Free.Replace('.', ',')) > 0).ToList();
             return assets;
         }
     }

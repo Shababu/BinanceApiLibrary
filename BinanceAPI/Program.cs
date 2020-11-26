@@ -14,6 +14,8 @@ using System.Threading;
 using System.Net.Http;
 using Newtonsoft.Json;
 using BinanceApiLibrary.Deserialization.AccountWallet;
+using BinanceApiLibrary.Deserialization;
+using BinanceApiLibrary.Trading;
 
 namespace BinanceAPI
 {
@@ -21,15 +23,28 @@ namespace BinanceAPI
     {
         static void Main(string[] args)
         {
-            //Пример использования: Вывод баланса всех кошельков, которые не пустые
-            //BinanceApiUser user = new BinanceApiUser("Публичный ключ аккаунта", "Приватный ключ аккаунта");
+            // Пример использования: Вывод баланса всех кошельков, которые не пустые
+            // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
             //List<Balances> wallet = MarketInfo.GetWalletInfo(user);
-
             //foreach (var asset in wallet)
             //{
             //    Console.WriteLine(asset);
             //}
 
+
+            // Пример использования: Вывод торговых операций по торговой паре от более новых к более старым
+            // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
+            //List<Trade> trades = AccountInfo.GetTrades(user, "ONEUSDT");
+            //foreach (var trade in trades)
+            //{
+            //    Console.WriteLine(trade.ToString() + "\n");
+            //}
+
+
+            // Пример использования: Размещение ордера
+            // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
+            //Trader.PlaceNewLimitOrder(user, "XRPUSDT", "SELL", "50", "0.70");
+            Console.ReadLine();                
         }
     }
 }

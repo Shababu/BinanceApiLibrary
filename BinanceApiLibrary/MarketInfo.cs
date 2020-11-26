@@ -63,7 +63,7 @@ namespace BinanceApiLibrary
             }
             string[] chars = new string[5];
             chars = response.Split(',');
-            return chars[4].Substring(7, 13);
+            return chars[4].Substring(7);
         }
 
         public static List<Balances> GetWalletInfo(BinanceApiUser user)
