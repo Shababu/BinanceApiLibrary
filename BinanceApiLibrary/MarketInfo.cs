@@ -51,7 +51,7 @@ namespace BinanceApiLibrary
 
         public static string GetTimestamp()
         {
-            string url = $"https://api.binance.com/api/v3/trades?symbol=XRPUSDT&limit=1";
+            string url = $"https://api.binance.com/api/v3/time";
             HttpWebRequest HTTPrequest = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse HTTPresponse = (HttpWebResponse)HTTPrequest.GetResponse();
 
@@ -61,9 +61,8 @@ namespace BinanceApiLibrary
             {
                 response = reader.ReadToEnd();
             }
-            string[] chars = new string[5];
-            chars = response.Split(',');
-            return chars[4].Substring(7);
+            response = response.Substring(14).Trim('}');
+            return response;
         }
 
         public static List<Balances> GetWalletInfo(BinanceApiUser user)

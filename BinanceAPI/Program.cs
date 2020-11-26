@@ -43,7 +43,9 @@ namespace BinanceAPI
 
             // Пример использования: Размещение ордера
             // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
-            //Trader.PlaceNewLimitOrder(user, "XRPUSDT", "SELL", "50", "0.70");
+            // Trader.PlaceNewLimitOrder(user, "XRPUSDT", "SELL", "50", "0.70");
+
+
             Console.ReadLine();                
         }
     }
