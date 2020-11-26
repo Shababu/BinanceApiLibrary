@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using BinanceApiLibrary.Deserialization.AccountWallet;
 using BinanceApiLibrary.Deserialization;
 using BinanceApiLibrary.Trading;
+using BinanceApiLibrary.Deserialization.Trades;
 
 namespace BinanceAPI
 {
@@ -46,6 +47,9 @@ namespace BinanceAPI
             // Trader.PlaceNewLimitOrder(user, "XRPUSDT", "SELL", "50", "0.70");
 
 
+            // Пример использования: Статистика о торговой апре за последние 24 часа
+            //AssetStats stats = AssetStats.DeserializeAssetStats(MarketInfo.Get24HourStatOnAsset("XRPUSDT"));
+            //Console.WriteLine(stats.ToString());
             Console.ReadLine();                
         }
     }

@@ -84,5 +84,20 @@ namespace BinanceApiLibrary
 
             return WalletDeserialization.DeserializeWalletInfo(response);
         }
+    
+        public static string Get24HourStatOnAsset(string symbol)
+        {
+            string url = $"https://api.binance.com/api/v3/ticker/24hr?symbol={symbol}";
+            HttpWebRequest HTTPrequest = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse HTTPresponse = (HttpWebResponse)HTTPrequest.GetResponse();
+
+            string response;
+
+            using (StreamReader reader = new StreamReader(HTTPresponse.GetResponseStream()))
+            {
+                response = reader.ReadToEnd();
+            }
+            return response;
+        }
     }
 }
