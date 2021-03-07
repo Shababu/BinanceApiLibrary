@@ -1,0 +1,37 @@
+1. На рабочем столе необходимо создать текстовый файл TradeConfig.txt
+
+2. В классе Program на 44 строке кода необходимо поменять текущий путь к файлу (string configPath = @"C:/Users/Саид/Desktop/TradeConfig.txt";)
+
+3. Файл должен выглядеть следующим образом:
+  "Цена" "Количество" "Дистанция" "Купил ли?" "Выставлен ли ордер на покупку" "Выставлен ли ордер на продажу"
+Например:
+0,7235 36 0,015 True True True
+0,7085 36 0,015 True True True
+0,6935 36 0,015 True True True
+0,6785 36 0,015 True True True
+0,6635 36 0,015 True True True
+0,6485 36 0,015 True True True
+0,6335 36 0,015 True True True
+0,6185 36 0,015 True True True
+0,6035 40 0,015 True True True
+0,5885 40 0,015 True True True
+0,5735 40 0,015 True True True
+0,5734 200 0,025 True True True
+0,5635 40 0,01 True True True
+0,5535 40 0,01 True True True
+0,5534 200 0,02 True True True
+0,5435 48 0,01 True True True
+0,5335 48 0,01 True True True
+0,5334 200 0,02 True True True
+0,5235 40 0,01 True True True
+0,5135 40 0,01 True True True
+0,5035 40 0,01 True True True
+0,4935 47,6 0,01 True True True
+0,4835 23,0 0,01 True True True
+0,4735 23,0 0,01 True True True
+0,4635 24,0 0,01 True True True
+
+4. На данный момент программа торгует криптоволютой "XRP" к доллару бинанса "BUSD"
+Если требуется торговать другой криптоволютой, придется внести изменения в 43 строку кода класса Program 
+(Cryptocurrency coinToTrade = new Cryptocurrency("BTCUSDT", "BTC");)
+Первый параметр метода указывает на торговую пару. Второй - на название криптовалюты 
