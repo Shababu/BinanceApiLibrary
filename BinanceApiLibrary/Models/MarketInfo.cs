@@ -1,19 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
-using Newtonsoft;
 using Newtonsoft.Json;
 using BinanceApiLibrary.Cryptocurrencies;
 using System.Collections.Generic;
-using System.Transactions;
-using System.Security.Cryptography;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Security.Cryptography.X509Certificates;
 using BinanceApiLibrary.Deserialization.AccountWallet;
 
-namespace BinanceApiLibrary
+namespace BinanceApiLibrary.Models
 {
     public class MarketInfo
     {
@@ -33,7 +25,7 @@ namespace BinanceApiLibrary
                 response = reader.ReadToEnd();
             }
 
-            Cryptocurrency cryptoInfo = JsonConvert.DeserializeObject<Xrp>(response);
+            Cryptocurrency cryptoInfo = JsonConvert.DeserializeObject<Cryptocurrency>(response);
 
             return cryptoInfo;
         }

@@ -1,22 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using BinanceApiLibrary;
 using BinanceApiLibrary.Cryptocurrencies;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Threading;
-using System.Net.Http;
-using Newtonsoft.Json;
-using BinanceApiLibrary.Deserialization.AccountWallet;
-using BinanceApiLibrary.Deserialization;
 using BinanceApiLibrary.Trading;
-using BinanceApiLibrary.Deserialization.Trades;
+using BinanceApiLibrary.Models;
 
 namespace BinanceAPI
 {
@@ -26,20 +13,20 @@ namespace BinanceAPI
         {
             // Пример использования: Вывод баланса всех кошельков, которые не пустые
             // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
-            //List<Balances> wallet = MarketInfo.GetWalletInfo(user);
-            //foreach (var asset in wallet)
-            //{
-            //    Console.WriteLine(asset);
-            //}
+            // List<Balances> wallet = MarketInfo.GetWalletInfo(user);
+            // foreach (var asset in wallet)
+            // {
+            //     Console.WriteLine(asset);
+            // }
 
 
             // Пример использования: Вывод торговых операций по торговой паре от более новых к более старым
             // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
-            //List<Trade> trades = AccountInfo.GetTrades(user, "ONEUSDT");
-            //foreach (var trade in trades)
-            //{
-            //    Console.WriteLine(trade.ToString() + "\n");
-            //}
+            // List<Trade> trades = AccountInfo.GetTrades(user, "ONEUSDT");
+            // foreach (var trade in trades)
+            // {
+            //     Console.WriteLine(trade.ToString() + "\n");
+            // }
 
 
             // Пример использования: Размещение ордера
@@ -48,9 +35,27 @@ namespace BinanceAPI
 
 
             // Пример использования: Статистика о торговой апре за последние 24 часа
-            //AssetStats stats = AssetStats.DeserializeAssetStats(MarketInfo.Get24HourStatOnAsset("XRPUSDT"));
-            //Console.WriteLine(stats.ToString());
-            Console.ReadLine();                
+            // AssetStats stats = AssetStats.DeserializeAssetStats(MarketInfo.Get24HourStatOnAsset("XRPUPUSDT"));
+            // Console.WriteLine(stats.ToString());
+            // Console.ReadLine();   
+
+            BinanceApiUser user = new BinanceApiUser("Публичнй ключ", "Приватный ключ"); // СЮДА НАДО ВСТАВИТЬ СВОИ КЛЮЧИ!!!
+            Cryptocurrency coinToTrade = new Cryptocurrency("XRPBUSD", "XRP");
+            string configPath = @"C:/Users/Саид/Desktop/TradeConfig.txt";
+
+            List<Position> orders = Trader.ReadTradeStateFromFile(configPath);
+
+            Trader.CheckOrders(user, orders, coinToTrade, configPath);
+
+            while (true)
+            {
+                Trader.Analize(user, orders, coinToTrade, configPath);
+                if (DateTime.Now.Second == 0)
+                {
+                    Console.Clear();
+                }
+                Thread.Sleep(200);
+            }
         }
     }
 }

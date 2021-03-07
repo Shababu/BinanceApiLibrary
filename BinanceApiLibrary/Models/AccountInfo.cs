@@ -1,19 +1,17 @@
 ﻿using BinanceApiLibrary.Deserialization;
-using BinanceApiLibrary.Deserialization.AccountWallet;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 
-namespace BinanceApiLibrary
+namespace BinanceApiLibrary.Models
 {
-    public class AccountInfo
+    public static class AccountInfo
     {
         public static string BaseUrl { get => "https://api.binance.com/"; }
         public static string TradeUrl { get => "api/v3/myTrades?"; }
-        public static List<Trade> GetTrades(BinanceApiUser user, string symbol)
+        public static List<Order> GetTrades(BinanceApiUser user, string symbol)
         {
             string response;
 
@@ -31,10 +29,10 @@ namespace BinanceApiLibrary
             }
 
             List<object> trades = JsonConvert.DeserializeObject<List<object>>(response);
-            List<Trade> listOfTrades = new List<Trade>();
+            List<Order> listOfTrades = new List<Order>();
             foreach (var trade in trades)
             {
-                Trade tradeInfo = new Trade();
+                Order tradeInfo = new Order();
                 string tradeString = trade.ToString();
                 tradeString = tradeString.Trim('{', '}');
                 string[] tradeStrings = tradeString.Split(',');

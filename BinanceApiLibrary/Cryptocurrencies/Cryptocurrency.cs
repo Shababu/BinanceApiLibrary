@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BinanceApiLibrary.Cryptocurrencies
+﻿namespace BinanceApiLibrary.Cryptocurrencies
 {
     public class Cryptocurrency
     {
+        public string Name { get; set; }
         public string Symbol { get; set; }
         public float Price { get; set; }
 
+        public Cryptocurrency(string symbol, string name)
+        {
+            Symbol = symbol;
+            Name = name;
+        }
         public Cryptocurrency(string symbol, float price)
         {
             Symbol = symbol;
             Price = price;
         }
-
         public Cryptocurrency()
         {
             Symbol = "XRPUSDT";
