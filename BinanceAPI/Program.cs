@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using BinanceApiLibrary.Cryptocurrencies;
-using System.Threading;
-using BinanceApiLibrary.Trading;
 using BinanceApiLibrary.Models;
+using BinanceApiLibrary.Deserialization.AccountWallet;
+using BinanceApiLibrary.Wallet;
+using BinanceApiLibrary.Deserialization.Trades;
+using BinanceApiLibrary.TradeHistory;
+using BinanceApiLibrary.Cryptocurrencies;
+using BinanceApiLibrary.Trading;
+using System.Threading;
 
 namespace BinanceAPI
 {
@@ -13,7 +17,7 @@ namespace BinanceAPI
         {
             // Пример использования: Вывод баланса всех кошельков, которые не пустые
             // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
-            // List<Balances> wallet = MarketInfo.GetWalletInfo(user);
+            // List<AccountBalance> wallet = WalletInfo.GetWalletInfo(user);
             // foreach (var asset in wallet)
             // {
             //     Console.WriteLine(asset);
@@ -22,7 +26,7 @@ namespace BinanceAPI
 
             // Пример использования: Вывод торговых операций по торговой паре от более новых к более старым
             // BinanceApiUser user = new BinanceApiUser("публичный ключ", "секретный ключ");
-            // List<Trade> trades = AccountInfo.GetTrades(user, "ONEUSDT");
+            // List<FilledTrade> trades = AccountInfo.GetTrades(user, "XRPBUSD");
             // foreach (var trade in trades)
             // {
             //     Console.WriteLine(trade.ToString() + "\n");
@@ -37,13 +41,14 @@ namespace BinanceAPI
             // Пример использования: Статистика о торговой апре за последние 24 часа
             // AssetStats stats = AssetStats.DeserializeAssetStats(MarketInfo.Get24HourStatOnAsset("XRPUPUSDT"));
             // Console.WriteLine(stats.ToString());
-            // Console.ReadLine();   
+            // Console.ReadLine();
 
-            BinanceApiUser user = new BinanceApiUser("Публичный ключ", "Приватный ключ"); // СЮДА НАДО ВСТАВИТЬ СВОИ КЛЮЧИ!!!
+
+            BinanceApiUser user = new BinanceApiUser("Публичный ключ", "Приватный ключ");
             Cryptocurrency coinToTrade = new Cryptocurrency("XRPBUSD", "XRP");
             string configPath = @"C:/Users/Саид/Desktop/TradeConfig.txt";
 
-            List<Position> orders = Trader.ReadTradeStateFromFile(configPath);
+            List<SpotPosition> orders = Trader.ReadTradeStateFromFile(configPath);
 
             Trader.CheckOrders(user, orders, coinToTrade, configPath);
 

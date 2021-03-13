@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace BinanceApiLibrary.Deserialization
+namespace BinanceApiLibrary.Deserialization.Trades
 {
-    public class Order
+    public class FilledTrade
     {
         public string Symbol { get; set; }
         public string OrderId { get; set; }
@@ -14,9 +14,9 @@ namespace BinanceApiLibrary.Deserialization
         public bool IsBuyer { get; set; }
         public bool IsMaker { get; set; }
 
-        public static Order DeserializeOrder(string json)
+        public static FilledTrade DeserializeOrder(string json)
         {
-            Order stats = JsonConvert.DeserializeObject<Order>(json);
+            FilledTrade stats = JsonConvert.DeserializeObject<FilledTrade>(json);
             return stats;
         }
 

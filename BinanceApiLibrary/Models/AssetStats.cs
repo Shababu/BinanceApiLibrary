@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace BinanceApiLibrary.Deserialization.Trades
+namespace BinanceApiLibrary.Models
 {
     public class AssetStats
     {

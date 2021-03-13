@@ -1,12 +1,8 @@
-﻿using BinanceApiLibrary.Deserialization;
-using BinanceApiLibrary.Deserialization.AccountWallet;
-using BinanceApiLibrary.Deserialization.Trades;
+﻿using BinanceApiLibrary.Deserialization.Trades;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Linq;
 using BinanceApiLibrary.Cryptocurrencies;
 using BinanceApiLibrary.Models;
 
@@ -36,7 +32,7 @@ namespace BinanceApiLibrary.Trading
             return response;
         }
 
-        public static void Analize(BinanceApiUser user, List<Position> positions, Cryptocurrency crypto, string configPath)
+        public static void Analize(BinanceApiUser user, List<SpotPosition> positions, Cryptocurrency crypto, string configPath)
         {
             try
             {
@@ -125,7 +121,7 @@ namespace BinanceApiLibrary.Trading
             return true;
         }
 
-        public static void CheckOrders(BinanceApiUser user, List<Position> positions, Cryptocurrency crypto, string configPath)
+        public static void CheckOrders(BinanceApiUser user, List<SpotPosition> positions, Cryptocurrency crypto, string configPath)
         {
             decimal priceOfAsset = Convert.ToDecimal(AssetStats.DeserializeAssetStats(MarketInfo.Get24HourStatOnAsset(crypto.Symbol)).LastPrice.Replace('.', ','));
 
@@ -187,9 +183,9 @@ namespace BinanceApiLibrary.Trading
             }
         }
 
-        public static List<Position> ReadTradeStateFromFile(string path)
+        public static List<SpotPosition> ReadTradeStateFromFile(string path)
         {
-            List<Position> positions = new List<Position>();
+            List<SpotPosition> positions = new List<SpotPosition>();
 
             using (StreamReader stream = new StreamReader(path))
             {
@@ -197,7 +193,7 @@ namespace BinanceApiLibrary.Trading
                 while (orderRawInfo != null)
                 {
                     string[] positionInfoArray = orderRawInfo.Split(' ');
-                    Position position = new Position();
+                    SpotPosition position = new SpotPosition();
                     position.Price = Convert.ToDecimal(positionInfoArray[0]);
                     position.Amount = Convert.ToDecimal(positionInfoArray[1]);
                     position.Distance = Convert.ToDecimal(positionInfoArray[2]);
@@ -214,9 +210,9 @@ namespace BinanceApiLibrary.Trading
             return positions;
         }
 
-        public static void WriteTradeStateToFile(string path, Position position)
+        public static void WriteTradeStateToFile(string path, SpotPosition position)
         {
-            List<Position> positions = ReadTradeStateFromFile(path);
+            List<SpotPosition> positions = ReadTradeStateFromFile(path);
 
             using (StreamWriter stream = new StreamWriter(path))
             {
@@ -236,7 +232,7 @@ namespace BinanceApiLibrary.Trading
             }
         }
 
-        public static void IncreaseAmount(Position position)
+        public static void IncreaseAmount(SpotPosition position)
         {
             decimal newDollarAmount = (((position.Amount * (position.Price + position.Distance)) - (position.Price * position.Amount)) * .99M) + (position.Price * position.Amount); // 13,87
 
@@ -250,7 +246,7 @@ namespace BinanceApiLibrary.Trading
 
 
 
-        public static bool IsOrderCheckNeeded(Position position, decimal priceOfAsset)
+        public static bool IsOrderCheckNeeded(SpotPosition position, decimal priceOfAsset)
         {
             if (priceOfAsset >= (position.Price - position.Price / 60) &&
                (priceOfAsset < position.Price + position.Price / 60) ||
@@ -282,7 +278,7 @@ namespace BinanceApiLibrary.Trading
             {
                 response = reader.ReadToEnd();
             }
-            return Order.DeserializeOrder(response).OrderId;
+            return FilledTrade.DeserializeOrder(response).OrderId;
         }
     }
 }

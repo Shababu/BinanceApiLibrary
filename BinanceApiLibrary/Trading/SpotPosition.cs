@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BinanceApiLibrary.Trading
+﻿namespace BinanceApiLibrary.Trading
 {
-    public class Position
+    public class SpotPosition
     {
         public string Side { get; set; }
         public string OrderId { get; set; }

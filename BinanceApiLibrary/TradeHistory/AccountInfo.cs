@@ -1,17 +1,18 @@
-﻿using BinanceApiLibrary.Deserialization;
+﻿using BinanceApiLibrary.Deserialization.Trades;
+using BinanceApiLibrary.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
-namespace BinanceApiLibrary.Models
+namespace BinanceApiLibrary.TradeHistory
 {
     public static class AccountInfo
     {
         public static string BaseUrl { get => "https://api.binance.com/"; }
         public static string TradeUrl { get => "api/v3/myTrades?"; }
-        public static List<Order> GetTrades(BinanceApiUser user, string symbol)
+        public static List<FilledTrade> GetTrades(BinanceApiUser user, string symbol)
         {
             string response;
 
@@ -29,13 +30,14 @@ namespace BinanceApiLibrary.Models
             }
 
             List<object> trades = JsonConvert.DeserializeObject<List<object>>(response);
-            List<Order> listOfTrades = new List<Order>();
+            List<FilledTrade> listOfTrades = new List<FilledTrade>();
             foreach (var trade in trades)
             {
-                Order tradeInfo = new Order();
+                FilledTrade tradeInfo = new FilledTrade();
                 string tradeString = trade.ToString();
                 tradeString = tradeString.Trim('{', '}');
                 string[] tradeStrings = tradeString.Split(',');
+                tradeInfo.OrderId = tradeStrings[1].Substring(10);
                 tradeInfo.Symbol = tradeStrings[0].Substring(15).Trim('"');
                 tradeInfo.Price = Convert.ToDouble(tradeStrings[4].Substring(13).Trim('"').Replace('.', ','));
                 tradeInfo.Qty = Convert.ToDouble(tradeStrings[5].Substring(11).Trim('"').Replace('.', ','));

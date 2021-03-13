@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using BinanceApiLibrary.Cryptocurrencies;
-using BinanceApiLibrary.Deserialization;
 using BinanceApiLibrary.Models;
 using BinanceApiLibrary.Trading;
 using Xunit;
@@ -15,7 +14,7 @@ namespace BinanceApiUnitTests
         {
             BinanceApiUser user = new BinanceApiUser("Публичный ключ", "Приватный ключ");
             string configPath = @"C:/Users/Саид/Desktop/TradeConfig.txt";
-            List<Position> orders = Trader.ReadTradeStateFromFile(configPath);
+            List<SpotPosition> orders = Trader.ReadTradeStateFromFile(configPath);
             Cryptocurrency cryptocurrency = new Cryptocurrency("XRPBUSD", "XRP");
 
             Trader.CheckOrders(user, orders, cryptocurrency, configPath);
@@ -26,6 +25,13 @@ namespace BinanceApiUnitTests
                 Assert.True(order.IsBuyOrderPlaced);
                 Assert.True(order.IsSellOrderPlaced);
             }
+        }
+
+        [Fact]
+        public static void Trader_PlaceOrder()
+        {
+            BinanceApiUser user = new BinanceApiUser("Публичный ключ", "Приватный ключ");
+            Trader.PlaceNewLimitOrder(user, "XRPBUSD", "SELL", "30", "0.50");
         }
     }
 }
