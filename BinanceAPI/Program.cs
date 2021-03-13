@@ -39,7 +39,7 @@ namespace BinanceAPI
             // Console.WriteLine(stats.ToString());
             // Console.ReadLine();   
 
-            BinanceApiUser user = new BinanceApiUser("Публичнй ключ", "Приватный ключ"); // СЮДА НАДО ВСТАВИТЬ СВОИ КЛЮЧИ!!!
+            BinanceApiUser user = new BinanceApiUser("Публичный ключ", "Приватный ключ"); // СЮДА НАДО ВСТАВИТЬ СВОИ КЛЮЧИ!!!
             Cryptocurrency coinToTrade = new Cryptocurrency("XRPBUSD", "XRP");
             string configPath = @"C:/Users/Саид/Desktop/TradeConfig.txt";
 

@@ -141,14 +141,14 @@ namespace BinanceApiLibrary.Trading
                     Console.WriteLine($"Покупка {crypto.Name}");
                     Console.ForegroundColor = ConsoleColor.White;
 
-                    PlaceNewLimitOrder(user, crypto.Symbol, "SELL", position.Amount.ToString().Replace(',', '.'), (position.Price + position.Distance * 0.96M).ToString().Replace(',', '.'));
+                    PlaceNewLimitOrder(user, crypto.Symbol, "SELL", position.Amount.ToString().Replace(',', '.'), (position.Price + position.Distance * 0.99M).ToString().Replace(',', '.'));
                     position.IsSellOrderPlaced = true;
                     WriteTradeStateToFile(configPath, position);
                 }
 
-                if ( (position.IsBought && !position.IsSellOrderPlaced) && priceOfAsset > position.Price)
+                if ( (position.IsBought && !position.IsSellOrderPlaced) && priceOfAsset > (position.Price + position.Distance) )
                 {
-                    PlaceNewLimitOrder(user, crypto.Symbol, "SELL", position.Amount.ToString().Replace(',', '.'), (position.Price + position.Distance * 0.96M).ToString().Replace(',', '.'));
+                    PlaceNewLimitOrder(user, crypto.Symbol, "SELL", position.Amount.ToString().Replace(',', '.'), (position.Price + position.Distance * 0.99M).ToString().Replace(',', '.'));
                     position.IsBought = position.IsSellOrderPlaced = position.IsBuyOrderPlaced = false;
                     WriteTradeStateToFile(configPath, position);
 
